@@ -13,14 +13,14 @@
         <nav>
             <img src="images/logo.jpeg" class="logo">
             <ul id="sidemenu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Contact Me</a></li>
-                <i class="fa-solid fa-square-xmark" onclick="closemenu()"></i>
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Project</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fas fa-times" onclick="closemenu()"></i>
             </ul>
-            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
         </nav>
         <div class="header-text">
             <p>Web Developer</p>
@@ -39,7 +39,7 @@
             </div>
             <div class="about-col-2">
                 <h1 class="sub-title">About Me</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem pariatur labore cumque? Sequi, tempora accusantium reiciendis repellat expedita aut, labore quidem mollitia neque ipsum suscipit ducimus ex sit fugiat perferendis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic modi provident rerum facere iusto beatae, quidem deleniti nemo distinctio numquam. Facere adipisci ex corrupti dolorem hic fugit rem harum quaerat!</p>
+                <p>I am a dedicated web developer with a passion for crafting intuitive and visually appealing digital experiences, leveraging my expertise in front-end and back-end technologies to create innovative solutions.I am a skilled web developer with expertise in Node.Js, Express.Js, My SQL, PostgreSQL, JavaScript, HTML, and CSS, actively seeking new opportunities to contribute my knowledge and experience to innovative projects</p>
 
                 <div class="tab-titles">
                     <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
@@ -50,14 +50,14 @@
                     <ul>
                         <li><span>Front End</span><br>HTML, CSS, Javascript</li>
                         <li><span>Back End</span><br>Node.js, Express.js, Java</li>
-                        <li><span>Data Base</span><br>Sql, PostgreSql</li>
+                        <li><span>Data Base</span><br>MySQL, PostgreSql</li>
                     </ul>
                 </div>
                 <div class="tab-contents" id="experience">
                     <ul>
                         <li><span>2021</span><br>HTML, CSS, Javascript Project</li>
                         <li><span>2023</span><br>Node.js, Express.js, Java Project</li>
-                        <li><span>2022</span><br>Sql, PostgreSql Project</li>
+                        <li><span>2022</span><br>MySQL, PostgreSql Project</li>
                     </ul>
                 </div>
                 <div class="tab-contents" id="education">
@@ -118,12 +118,13 @@
                 <a href="images/Lekhraj-Resume.pdf" download class="btn btn2"> Download Cv</a> 
             </div> 
             <div class="contact-right">
-                <form>
+                <form name="submit-to-google-sheet">
                     <input type="text" name="Name" placeholder="Your name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
                     <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
                     <button type="submit" class="btn btn2">Sumbit</button>
                 </form>
+                <span id="msg"></span>
             </div>
         </div>
     </div>
@@ -156,5 +157,24 @@
         sidemenu.style.right = "-200px";
     }
    </script>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyaFACdZtvYwWT9ek4XC-7PdZ3tlB7FZD6LbM9TBWi2JcNFVYxGDtnz2IRCo-zW4jFf/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent Successfully!!"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
 </body>
 </html>
